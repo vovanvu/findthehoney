@@ -17,12 +17,15 @@ public class GameTimerPanel extends JPanel {
 	public GameTimerPanel() {
 		setBorder(BorderFactory.createTitledBorder("Time"));
 		setPreferredSize(new Dimension(360, 50));
+		JLabel lSpace1 = new JLabel(":");
+		JLabel lSpace2 = new JLabel(":");
 		lHour = new JLabel("00");
-		lMinute = new JLabel(":00");
-		lSecond = new JLabel(":00");
-		setLayout(new GridLayout(1, 0));
+		lMinute = new JLabel("00");
+		lSecond = new JLabel("00");
 		add(lHour);
+		add(lSpace1);
 		add(lMinute);
+		add(lSpace2);
 		add(lSecond);
 	}
 
@@ -41,8 +44,8 @@ public class GameTimerPanel extends JPanel {
 					second = 0;
 					hour++;
 				}
-				lSecond.setText(" : " + second);
-				lMinute.setText(" : " + minute);
+				lSecond.setText("" + second);
+				lMinute.setText("" + minute);
 				lHour.setText("" + hour);
 
 			}
@@ -65,16 +68,16 @@ public class GameTimerPanel extends JPanel {
 			hour = 0;
 			minute = 0;
 			second = 0;
-			lSecond.setText(" : " + second);
-			lMinute.setText(" : " + minute);
+			lSecond.setText("" + second);
+			lMinute.setText("" + minute);
 			lHour.setText("" + hour);
 			timer.start();
 		} else if (!timer.isRunning()) {
 			hour = 0;
 			minute = 0;
 			second = 0;
-			lSecond.setText(" : " + second);
-			lMinute.setText(" : " + minute);
+			lSecond.setText("" + second);
+			lMinute.setText("" + minute);
 			lHour.setText("" + hour);
 			timer.start();
 		}

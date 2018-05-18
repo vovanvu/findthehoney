@@ -35,18 +35,17 @@ public class QuestionPanel extends JPanel {
 	public QuestionPanel() {
 		setPreferredSize(new Dimension(360, 200));
 		setBorder(BorderFactory.createTitledBorder("Question"));
-		library = new QuestionLibrary();
 		// init components
 		taQuestion = new JTextArea(10, 30);
 		taQuestion.setMargin(new Insets(10, 10, 10, 10));
 		taQuestion.setLineWrap(true);
 		taQuestion.setWrapStyleWord(true);
 		taQuestion.setEditable(false);
-		taQuestion.setText(library.getQuestions().get(0).getContent());
-		btA = new CustomButton("a", library.getQuestions().get(0).getAnswerA());
-		btB = new CustomButton("b", library.getQuestions().get(0).getAnswerB());
-		btC = new CustomButton("c", library.getQuestions().get(0).getAnswerC());
-		btD = new CustomButton("d", library.getQuestions().get(0).getAnswerD());
+		taQuestion.setText("Question Placeholder");
+		btA = new CustomButton("a", "Answer Placeholder");
+		btB = new CustomButton("b", "Answer Placeholder");
+		btC = new CustomButton("c", "Answer Placeholder");
+		btD = new CustomButton("d", "Answer Placeholder");
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		questionPanel = new JPanel();
 		add(questionPanel);

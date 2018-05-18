@@ -13,19 +13,17 @@ public class MainView {
 	private BoardPanel boardPanel;
 	private ExtensionPanel extensionPanel;
 
-	// private BoardPanel boardPanel;
-	// private ExtensionPanel extensionPanel;
 	public MainView(MainModel mainModel) {
 		this.mainModel = mainModel;
 		createView();
 	}
 
 	private void createView() {
-		//init
+		// init
 		createBoardPanel();
 		createExtensionPanel();
 		createInGameFrame();
-		//add to Frame
+		// add to Frame
 		inGameFrame.add(boardPanel, BorderLayout.LINE_START);
 		inGameFrame.add(extensionPanel, BorderLayout.LINE_END);
 	}
