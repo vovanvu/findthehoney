@@ -13,7 +13,4 @@ public class InGameFrame extends JFrame {
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
-	public static void main(String[] args) {
-		new InGameFrame();
-	}
 }

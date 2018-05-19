@@ -42,6 +42,7 @@ public class QuestionPanel extends JPanel {
 		taQuestion.setWrapStyleWord(true);
 		taQuestion.setEditable(false);
 		taQuestion.setText("Question Placeholder");
+		taQuestion.setFocusable(false);
 		btA = new CustomButton("a", "Answer Placeholder");
 		btB = new CustomButton("b", "Answer Placeholder");
 		btC = new CustomButton("c", "Answer Placeholder");

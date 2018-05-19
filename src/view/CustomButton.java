@@ -1,4 +1,5 @@
 package view;
+
 import javax.swing.JButton;
 
 public class CustomButton extends JButton {
@@ -7,6 +8,7 @@ public class CustomButton extends JButton {
 	public CustomButton(String id, String label) {
 		this.btnID = id;
 		setText(label);
+		setFocusable(false);
 	}
 
 	public String getBtnID() {

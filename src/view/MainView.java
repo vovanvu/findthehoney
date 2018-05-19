@@ -26,6 +26,7 @@ public class MainView {
 		// add to Frame
 		inGameFrame.add(boardPanel, BorderLayout.LINE_START);
 		inGameFrame.add(extensionPanel, BorderLayout.LINE_END);
+		inGameFrame.requestFocus();
 	}
 
 	private void createInGameFrame() {
@@ -42,8 +43,20 @@ public class MainView {
 		extensionPanel = new ExtensionPanel();
 	}
 
-	public static void main(String[] args) {
-		MainModel mainModel = new MainModel();
-		new MainView(mainModel);
+	
+
+	public InGameFrame getInGameFrame() {
+		return inGameFrame;
+	}
+
+	public BoardPanel getBoardPanel() {
+		return boardPanel;
+	}
+
+	public ExtensionPanel getExtensionPanel() {
+		return extensionPanel;
+	}
+	public void updateView() {
+		inGameFrame.repaint();
 	}
 }
