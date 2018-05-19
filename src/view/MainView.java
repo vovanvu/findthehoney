@@ -5,6 +5,9 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
@@ -144,12 +147,32 @@ public class MainView {
 
 	/***** SCORE METHOD *****/
 	private void showFinishFrame() {
-
 		name = new JFrame();
 		JPanel namePanel = new JPanel();
 		JLabel nameLabel = new JLabel("Ban da chien thang, nhap ten de luu diem: ");
 		namePanel.add(nameLabel);
 		typeName = new JTextField();
+		typeName.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent evt) {
+				// block user input non-alpha char and space
+				if (!Character.isAlphabetic(evt.getKeyChar()) && !(evt.getKeyCode() == KeyEvent.VK_SPACE)) {
+					evt.consume();
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+
+			}
+		});
 		JPanel confirmPanel = new JPanel();
 		JButton btnOk = new JButton("OK");
 		JButton btnCancel = new JButton("Cancel");
