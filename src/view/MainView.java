@@ -31,6 +31,7 @@ public class MainView {
 
 	private void createInGameFrame() {
 		inGameFrame = new InGameFrame();
+		inGameFrame.requestFocus();
 	}
 
 	private void createBoardPanel() {
@@ -48,14 +49,13 @@ public class MainView {
 	// question panel
 
 	public void hideQuestion() {
-
 		extensionPanel.getQuestionPanel().setVisible(false);
 	}
 
 	public void showQuestion() {
 		extensionPanel.getQuestionPanel().setVisible(true);
 		extensionPanel.getQuestionPanel().updateQuestion();
-		boardPanel.requestFocus(false);
+		inGameFrame.setFocusable(false);
 	}
 
 	// get Panel

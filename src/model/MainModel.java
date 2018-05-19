@@ -72,4 +72,8 @@ public class MainModel {
 	public void updateQuestionIndex() {
 		library.updateQuestionIndex();
 	}
+
+	public Question getCurrentQuestion() {
+		return library.getQuestions().get(library.getQuestionIndex());
+	}
 }

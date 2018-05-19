@@ -7,6 +7,7 @@ import javax.swing.*;
 public class Bear {
 
 	private int tileX, tileY;
+	private int xPrevious, yPrevious;
 
 	public Bear() {
 		tileX = 1;
@@ -56,6 +57,19 @@ public class Bear {
 	public int getTitleY() {
 		return tileY;
 
+	}
+
+	public int getxPrevious() {
+		return xPrevious;
+	}
+
+	public int getyPrevious() {
+		return yPrevious;
+	}
+
+	public void setPrevious(int xPrevious, int yPrevious) {
+		this.xPrevious = xPrevious;
+		this.yPrevious = yPrevious;
 	}
 
 	public void getPosition() {
