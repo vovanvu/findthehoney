@@ -9,28 +9,28 @@ import model.MainModel;
 
 public class MainView {
 	private MainModel mainModel;
+	private MainMenuFrame mainMenuFrame;
 	private InGameFrame inGameFrame;
 	private BoardPanel boardPanel;
 	private ExtensionPanel extensionPanel;
 
+	
 	public MainView(MainModel mainModel) {
 		this.mainModel = mainModel;
-		createView();
+		createMainMenuFrame();
 	}
 
-	private void createView() {
-		// init
+	public void createMainMenuFrame() {
+		mainMenuFrame = new MainMenuFrame();
+	}
+
+	public void createInGameFrame() {
 		createBoardPanel();
 		createExtensionPanel();
-		createInGameFrame();
+		inGameFrame = new InGameFrame();
 		// add to Frame
 		inGameFrame.add(boardPanel, BorderLayout.LINE_START);
 		inGameFrame.add(extensionPanel, BorderLayout.LINE_END);
-		inGameFrame.requestFocus();
-	}
-
-	private void createInGameFrame() {
-		inGameFrame = new InGameFrame();
 		inGameFrame.requestFocus();
 	}
 
@@ -58,6 +58,29 @@ public class MainView {
 		inGameFrame.setFocusable(false);
 	}
 
+	public void startClock() {
+		extensionPanel.getGameTimerPanel().runClock();
+	}
+
+	public void resetFocus() {
+		inGameFrame.setFocusable(true);
+		inGameFrame.requestFocus();
+	}
+
+	public void removeFocus() {
+		inGameFrame.setFocusable(false);
+	}
+
+	public void resetClock() {
+		extensionPanel.getGameTimerPanel().resetClock();
+	}
+
+	public void informWin() {
+		if (mainModel.isGameWin()) {
+			// todo informWin
+		}
+	}
+
 	// get Panel
 	public InGameFrame getInGameFrame() {
 		return inGameFrame;
@@ -70,4 +93,9 @@ public class MainView {
 	public ExtensionPanel getExtensionPanel() {
 		return extensionPanel;
 	}
+
+	public MainMenuFrame getMainMenuFrame() {
+		return mainMenuFrame;
+	}
+
 }

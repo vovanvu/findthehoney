@@ -4,11 +4,13 @@ public class MainModel {
 	private Bear bear;
 	private GameMap gameMap;
 	private QuestionLibrary library;
+	private boolean gameWin;
 
 	public MainModel() {
 		bear = new Bear();
 		gameMap = new GameMap();
 		library = new QuestionLibrary();
+		gameWin = false;
 	}
 
 	public Bear getBear() {
@@ -41,11 +43,6 @@ public class MainModel {
 		int x = bear.getTitleX();
 		int y = bear.getTitleY();
 		switch (mapElement) {
-		// case QUESTION:
-		// if (direction == Direction.DOWN || direction == Direction.UP || direction ==
-		// Direction.LEFT
-		// || direction == Direction.RIGHT)
-		// return gameMap.getMap(x, y).equals("q");
 		case QUESTION:
 			if (direction == Direction.RIGHT)
 				return gameMap.getMap(x + 1, y).equals("q");
@@ -64,6 +61,15 @@ public class MainModel {
 				return gameMap.getMap(x, y - 1).equals("r");
 			else if (direction == Direction.DOWN)
 				return gameMap.getMap(x, y + 1).equals("r");
+		case HONEY:
+			if (direction == Direction.RIGHT)
+				return gameMap.getMap(x + 1, y).equals("h");
+			else if (direction == Direction.LEFT)
+				return gameMap.getMap(x - 1, y).equals("h");
+			else if (direction == Direction.UP)
+				return gameMap.getMap(x, y - 1).equals("h");
+			else if (direction == Direction.DOWN)
+				return gameMap.getMap(x, y + 1).equals("h");
 		default:
 			return false;
 		}
@@ -75,5 +81,18 @@ public class MainModel {
 
 	public Question getCurrentQuestion() {
 		return library.getQuestions().get(library.getQuestionIndex());
+	}
+
+	public void resetGame() {
+		gameMap.resetMap();
+		bear.resetTile();
+	}
+
+	public boolean isGameWin() {
+		return gameWin;
+	}
+
+	public void setGameWin(boolean gameWin) {
+		this.gameWin = gameWin;
 	}
 }

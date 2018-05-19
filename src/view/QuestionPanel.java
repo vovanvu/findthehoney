@@ -61,6 +61,7 @@ public class QuestionPanel extends JPanel {
 		answerPanel.add(btB);
 		answerPanel.add(btC);
 		answerPanel.add(btD);
+		setVisible(false);
 	}
 
 	public void updateQuestion() {
