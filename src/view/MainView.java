@@ -55,7 +55,7 @@ public class MainView {
 		for (Player pA1 : historyPlayers) {
 			players.add(pA1);
 		}
-		//
+		// Contructor
 		this.mainModel = mainModel;
 		createMainMenuFrame();
 	}
