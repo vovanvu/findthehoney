@@ -14,10 +14,29 @@ public class Bear {
 
 	}
 
-	public void move(int tx, int ty) {
+	public void move(Direction direction) {
+		int tx = 0;
+		int ty = 0;
+		switch (direction) {
+		case UP:
+			tx = 0;
+			ty = -1;
+			break;
+		case DOWN:
+			tx = 0;
+			ty = 1;
+			break;
+		case LEFT:
+			tx = -1;
+			ty = 0;
+			break;
+		case RIGHT:
+			tx = 1;
+			ty = 0;
+			break;
+		}
 		tileX += tx;
 		tileY += ty;
-
 	}
 
 	public void setTile(int tileX, int tileY) {
@@ -37,5 +56,9 @@ public class Bear {
 	public int getTitleY() {
 		return tileY;
 
+	}
+
+	public void getPosition() {
+		System.out.println("x: " + getTitleX() + ", y: " + getTitleY());
 	}
 }

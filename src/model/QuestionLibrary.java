@@ -1,7 +1,9 @@
 package model;
+
 import java.util.ArrayList;
 
 public class QuestionLibrary {
+	private int questionIndex;
 	private ArrayList<Question> questions;
 
 	public QuestionLibrary() {
@@ -9,6 +11,7 @@ public class QuestionLibrary {
 	}
 
 	private void initListQuestion() {
+		questionIndex = 0;
 		questions = new ArrayList<Question>();
 		Question question1 = new Question("Viet Nam co bao nhieu tinh thanh?", "62", "63", "64", "65", "b");
 		Question question2 = new Question("Thanh pho cua tinh Phu Yen", "Nha Trang", "Quy Nhon", "Tuy Hoa",
@@ -45,4 +48,13 @@ public class QuestionLibrary {
 	public ArrayList<Question> getQuestions() {
 		return questions;
 	}
+
+	public int getQuestionIndex() {
+		return questionIndex;
+	}
+
+	public void updateQuestionIndex() {
+		questionIndex = (questionIndex + 1) % questions.size();
+	}
+
 }

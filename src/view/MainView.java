@@ -41,10 +41,24 @@ public class MainView {
 
 	private void createExtensionPanel() {
 		extensionPanel = new ExtensionPanel();
+		extensionPanel.getQuestionPanel().setLibrary(mainModel.getLibrary());
 	}
 
-	
+	// show hide
+	// question panel
 
+	public void hideQuestion() {
+
+		extensionPanel.getQuestionPanel().setVisible(false);
+	}
+
+	public void showQuestion() {
+		extensionPanel.getQuestionPanel().setVisible(true);
+		extensionPanel.getQuestionPanel().updateQuestion();
+		boardPanel.requestFocus(false);
+	}
+
+	// get Panel
 	public InGameFrame getInGameFrame() {
 		return inGameFrame;
 	}
@@ -55,8 +69,5 @@ public class MainView {
 
 	public ExtensionPanel getExtensionPanel() {
 		return extensionPanel;
-	}
-	public void updateView() {
-		inGameFrame.repaint();
 	}
 }

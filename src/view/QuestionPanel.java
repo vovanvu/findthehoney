@@ -63,12 +63,12 @@ public class QuestionPanel extends JPanel {
 		answerPanel.add(btD);
 	}
 
-	public void updateQuestion(int currentQuestionIndex) {
-		String content = library.getQuestions().get(currentQuestionIndex).getContent();
-		String a = library.getQuestions().get(currentQuestionIndex).getAnswerA();
-		String b = library.getQuestions().get(currentQuestionIndex).getAnswerB();
-		String c = library.getQuestions().get(currentQuestionIndex).getAnswerC();
-		String d = library.getQuestions().get(currentQuestionIndex).getAnswerD();
+	public void updateQuestion() {
+		String content = library.getQuestions().get(library.getQuestionIndex()).getContent();
+		String a = library.getQuestions().get(library.getQuestionIndex()).getAnswerA();
+		String b = library.getQuestions().get(library.getQuestionIndex()).getAnswerB();
+		String c = library.getQuestions().get(library.getQuestionIndex()).getAnswerC();
+		String d = library.getQuestions().get(library.getQuestionIndex()).getAnswerD();
 		taQuestion.setText(content);
 		btA.setText(a);
 		btB.setText(b);
