@@ -39,23 +39,17 @@ public class MainController implements GameController {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				mainView.createInGameFrame();
+				mainModel.setGameStarted();
 				xulyInGame();
-				mainView.getMainMenuFrame().dispose();
 			}
 		});
 	}
 
 	public void xulyInGame() {
-		xulyBatDauDemThoiGian();
 		xulyDiChuyen();
 		xulyButtonTraLoiCauHoi();
 		xulySuKienInGameMenu();
 		xulyThoatGame();
-	}
-
-	public void xulyBatDauDemThoiGian() {
-		mainView.startClock();
 	}
 
 	public void xulyDiChuyen() {
@@ -69,7 +63,7 @@ public class MainController implements GameController {
 					if (mainModel.onTile(MapElement.HONEY, direction)) {
 						xulyChienThang();
 					}
-					mainModel.getBear().move(direction);
+					mainModel.moveBear(direction);
 					mainModel.getBear().getPosition();
 				}
 			}
@@ -113,8 +107,6 @@ public class MainController implements GameController {
 
 	public void xulyGapCauHoi() {
 		mainModel.updateQuestionIndex();
-		mainView.showQuestion();
-
 	}
 
 	public void xulyButtonTraLoiCauHoi() {
@@ -159,20 +151,10 @@ public class MainController implements GameController {
 		Question question = mainModel.getCurrentQuestion();
 
 		if (question.isTrueAnswer(CustomButton.getBtnID())) {
-			// replace with grass
-			mainModel.getMap().updateMap(mainModel.getBear().getTitleX(), mainModel.getBear().getTitleY(), "g");
-			// set visible and forcus after click
-			mainView.getExtensionPanel().getQuestionPanel().setVisible(false);
-			mainView.getInGameFrame().setFocusable(true);
-			mainView.getInGameFrame().requestFocus();
+			mainModel.updateMapTrueAnswer();
 		} else {
-			// replace with rock
-			mainModel.getMap().updateMap(mainModel.getBear().getTitleX(), mainModel.getBear().getTitleY(), "r");
+			mainModel.updateMapFalseAnswer();
 			mainModel.getBear().setTile(xPrevious, yPrevious);
-			// set visible and forcus after click
-			mainView.getExtensionPanel().getQuestionPanel().setVisible(false);
-			mainView.getInGameFrame().setFocusable(true);
-			mainView.getInGameFrame().requestFocus();
 		}
 	}
 
@@ -185,65 +167,34 @@ public class MainController implements GameController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mainModel.resetGame();
-				mainView.hideQuestion();
-				mainView.resetClock();
-				mainView.resetFocus();
 			}
 		});
 		btPause.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GameMap map = mainModel.getMap();
-				int x = mainModel.getBear().getTitleX();
-				int y = mainModel.getBear().getTitleY();
-
-				if (btPause.getText().equals("Tam dung") && (!map.getMap(x, y).equals("q"))) {
-					mainView.getExtensionPanel().getGameTimerPanel().stopClock();
-					mainView.getBoardPanel().setEnabled(false);
-					mainView.removeFocus();
-					btPause.setText("Tiep tuc");
-				} else if (btPause.getText().equals("Tam dung") && (map.getMap(x, y).equals("q"))) {
-					// do nothing
-				} else {
-					mainView.getExtensionPanel().getGameTimerPanel().resumeClock();
-					mainView.getExtensionPanel().setEnabled(true);
-					mainView.resetFocus();
-					btPause.setText("Tam dung");
-				}
-
+				mainModel.setPause();
 			}
 		});
 		btMainMenu.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int choose = JOptionPane.showConfirmDialog(null, "Ban muon tro ve menu chinh?", "Xac nhan thoat",
-						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				if (choose == JOptionPane.YES_OPTION) {
-					mainView.getInGameFrame().dispose();
-					mainView.createMainMenuFrame();
-					xulyBatDauGame();
-				}
+				mainModel.setHasGoMainMenu();
+				xulyBatDauGame();
 			}
 		});
 	}
 
 	public void xulyChienThang() {
-		mainModel.setGameWin(true);
+		mainModel.setGameWin();
 	}
 
 	public void xulyThoatGame() {
 		mainView.getInGameFrame().addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				int choose = JOptionPane.showConfirmDialog(null, "Ban muon thoat game?", "Xac nhan thoat",
-						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
-				if (choose == JOptionPane.YES_OPTION) {
-					mainView.getInGameFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				} else {
-					mainView.getInGameFrame().setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				}
+				mainModel.setExit();
 			}
 		});
 	}

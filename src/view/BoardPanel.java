@@ -8,8 +8,7 @@ import javax.swing.*;
 import model.Bear;
 import model.GameMap;
 
-public class BoardPanel extends JPanel implements ActionListener {
-	private Timer timer;
+public class BoardPanel extends JPanel {
 	private GameImage gameImage;
 	private GameMap gameMap;
 	private Bear bear;
@@ -18,13 +17,6 @@ public class BoardPanel extends JPanel implements ActionListener {
 		gameImage = new GameImage();
 		setPreferredSize(new Dimension(400, 300));
 		setFocusable(true);
-		timer = new Timer(25, this);
-		timer.start();
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		repaint();
 	}
 
 	public void paint(Graphics g) {
@@ -55,6 +47,10 @@ public class BoardPanel extends JPanel implements ActionListener {
 
 	public void setBear(Bear bear) {
 		this.bear = bear;
+	}
+
+	public void updateBoard() {
+		repaint();
 	}
 
 }

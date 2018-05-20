@@ -27,11 +27,13 @@ import java.util.Scanner;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import model.GameMap;
 import model.MainModel;
 
 public class MainView implements Observer {
@@ -129,8 +131,96 @@ public class MainView implements Observer {
 		return mainMenuFrame;
 	}
 
+	private void updateView() {
+		boardPanel.updateBoard();
+	}
+
+	public void updateAfterAnswer() {
+		getExtensionPanel().getQuestionPanel().setVisible(false);
+		getInGameFrame().setFocusable(true);
+		getInGameFrame().requestFocus();
+	}
+
+	public void showExit() {
+		int choose = JOptionPane.showConfirmDialog(null, "Ban muon thoat game?", "Xac nhan thoat",
+				JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		if (choose == JOptionPane.YES_OPTION) {
+			inGameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		} else {
+			inGameFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		}
+	}
+
+	public void resetGame() {
+		hideQuestion();
+		resetClock();
+		resetFocus();
+	}
+
+	public void pauseGame() {
+		JButton btPause = getExtensionPanel().getInGameMenuPanel().getBtnPause();
+		GameMap map = mainModel.getMap();
+		int x = mainModel.getBear().getTitleX();
+		int y = mainModel.getBear().getTitleY();
+
+		if (btPause.getText().equals("Tam dung") && (!map.getMap(x, y).equals("q"))) {
+			getExtensionPanel().getGameTimerPanel().stopClock();
+			getBoardPanel().setEnabled(false);
+			removeFocus();
+			btPause.setText("Tiep tuc");
+		} else if (btPause.getText().equals("Tam dung") && (map.getMap(x, y).equals("q"))) {
+			// do nothing
+		} else {
+			getExtensionPanel().getGameTimerPanel().resumeClock();
+			getExtensionPanel().setEnabled(true);
+			resetFocus();
+			btPause.setText("Tam dung");
+		}
+
+	}
+
+	public void showMainMenu() {
+		int choose = JOptionPane.showConfirmDialog(null, "Ban muon tro ve menu chinh?", "Xac nhan thoat",
+				JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
+		if (choose == JOptionPane.YES_OPTION) {
+			getInGameFrame().dispose();
+			createMainMenuFrame();
+		}
+	}
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		informWin();
+		if (mainModel.isGameWin()) {
+			informWin();
+		}
+		if (mainModel.isUpdatedIndex()) {
+			showQuestion();
+		}
+		if (mainModel.isGameStarted()) {
+			createInGameFrame();
+			startClock();
+			getMainMenuFrame().dispose();
+		}
+		if (mainModel.isHasMove()) {
+		}
+		if (mainModel.isHasAnswerTrue()) {
+			updateAfterAnswer();
+		}
+		if (mainModel.isHasAnswerFalse()) {
+			updateAfterAnswer();
+		}
+		if (mainModel.isExit()) {
+			showExit();
+		}
+		if (mainModel.isHasReset()) {
+			resetGame();
+		}
+		if (mainModel.isHasPaue()) {
+			pauseGame();
+		}
+		if (mainModel.isHasGoMainMenu()) {
+			showMainMenu();
+		}
+		updateView();
 	}
 }

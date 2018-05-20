@@ -7,12 +7,20 @@ public class MainModel extends Observable {
 	private GameMap gameMap;
 	private QuestionLibrary library;
 	private boolean gameWin;
+	private boolean isUpdatedIndex;
+	private boolean isGameStarted;
+	private boolean isExit;
+	private boolean hasMove;
+	private boolean hasAnswerTrue;
+	private boolean hasAnswerFalse;
+	private boolean hasReset;
+	private boolean hasPaue;
+	private boolean hasGoMainMenu;
 
 	public MainModel() {
 		bear = new Bear();
 		gameMap = new GameMap();
 		library = new QuestionLibrary();
-		gameWin = false;
 	}
 
 	public Bear getBear() {
@@ -77,26 +85,119 @@ public class MainModel extends Observable {
 		}
 	}
 
-	public void updateQuestionIndex() {
-		library.updateQuestionIndex();
-	}
-
 	public Question getCurrentQuestion() {
 		return library.getQuestions().get(library.getQuestionIndex());
 	}
 
 	public void resetGame() {
+		hasReset = true;
 		gameMap.resetMap();
 		bear.resetTile();
+		notifyChanged();
+		hasReset = false;
 	}
 
 	public boolean isGameWin() {
 		return gameWin;
 	}
 
-	public void setGameWin(boolean gameWin) {
-		this.gameWin = gameWin;
+	public boolean isUpdatedIndex() {
+		return isUpdatedIndex;
+	}
+
+	public boolean isGameStarted() {
+		return isGameStarted;
+	}
+
+	public boolean isHasMove() {
+		return hasMove;
+	}
+
+	public void updateQuestionIndex() {
+		isUpdatedIndex = true;
+		library.updateQuestionIndex();
+		notifyChanged();
+		isUpdatedIndex = false;
+	}
+
+	public void setGameWin() {
+		this.gameWin = true;
+		notifyChanged();
+		gameWin = false;
+	}
+
+	public void setGameStarted() {
+		this.isGameStarted = true;
+		notifyChanged();
+		isGameStarted = false;
+	}
+
+	private void notifyChanged() {
 		setChanged();
 		notifyObservers();
+	}
+
+	public void moveBear(Direction direction) {
+		this.hasMove = true;
+		bear.move(direction);
+		notifyChanged();
+		this.hasMove = false;
+	}
+
+	public void updateMapTrueAnswer() {
+		hasAnswerTrue = true;
+		gameMap.updateMap(bear.getTitleX(), bear.getTitleY(), "g");
+		notifyChanged();
+		hasAnswerTrue = false;
+	}
+
+	public void updateMapFalseAnswer() {
+		hasAnswerFalse = true;
+		gameMap.updateMap(bear.getTitleX(), bear.getTitleY(), "r");
+		notifyChanged();
+		hasAnswerFalse = false;
+
+	}
+
+	public void setExit() {
+		this.isExit = true;
+		notifyChanged();
+		this.isExit = false;
+	}
+
+	public void setPause() {
+		this.hasPaue = true;
+		notifyChanged();
+		this.hasPaue = false;
+	}
+
+	public void setHasGoMainMenu() {
+		this.hasGoMainMenu = true;
+		notifyChanged();
+		this.hasGoMainMenu = false;
+	}
+
+	public boolean isHasAnswerTrue() {
+		return hasAnswerTrue;
+	}
+
+	public boolean isHasAnswerFalse() {
+		return hasAnswerFalse;
+	}
+
+	public boolean isExit() {
+		return isExit;
+	}
+
+	public boolean isHasReset() {
+		return hasReset;
+	}
+
+	public boolean isHasPaue() {
+		return hasPaue;
+	}
+
+	public boolean isHasGoMainMenu() {
+		return hasGoMainMenu;
 	}
 }
