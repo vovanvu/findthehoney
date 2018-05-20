@@ -23,7 +23,7 @@ import view.CustomButton;
 import view.MainMenuFrame;
 import view.MainView;
 
-public class MainController {
+public class MainController implements GameController {
 	private MainModel mainModel;
 	private MainView mainView;
 
@@ -34,7 +34,7 @@ public class MainController {
 		xulyBatDauGame();
 	}
 
-	private void xulyBatDauGame() {
+	public void xulyBatDauGame() {
 		mainView.getMainMenuFrame().getStart().addActionListener(new ActionListener() {
 
 			@Override
@@ -46,19 +46,19 @@ public class MainController {
 		});
 	}
 
-	private void xulyInGame() {
-		batDauDemThoiGian();
+	public void xulyInGame() {
+		xulyBatDauDemThoiGian();
 		xulyDiChuyen();
 		xulyButtonTraLoiCauHoi();
 		xulySuKienInGameMenu();
 		xulyThoatGame();
 	}
 
-	private void batDauDemThoiGian() {
+	public void xulyBatDauDemThoiGian() {
 		mainView.startClock();
 	}
 
-	private void xulyDiChuyen() {
+	public void xulyDiChuyen() {
 		mainView.getInGameFrame().addKeyListener(new KeyListener() {
 			private void move(Direction direction, MapRange mapRange) {
 				// can move if in map range and next move postion is not rock
@@ -111,13 +111,13 @@ public class MainController {
 		});
 	}
 
-	private void xulyGapCauHoi() {
+	public void xulyGapCauHoi() {
 		mainModel.updateQuestionIndex();
 		mainView.showQuestion();
 
 	}
 
-	private void xulyButtonTraLoiCauHoi() {
+	public void xulyButtonTraLoiCauHoi() {
 		CustomButton btA = mainView.getExtensionPanel().getQuestionPanel().getBtA();
 		CustomButton btB = mainView.getExtensionPanel().getQuestionPanel().getBtB();
 		CustomButton btC = mainView.getExtensionPanel().getQuestionPanel().getBtC();
@@ -155,7 +155,7 @@ public class MainController {
 
 	}
 
-	private void ganXuLyButtonTraLoi(CustomButton CustomButton, int xPrevious, int yPrevious) {
+	public void ganXuLyButtonTraLoi(CustomButton CustomButton, int xPrevious, int yPrevious) {
 		Question question = mainModel.getCurrentQuestion();
 
 		if (question.isTrueAnswer(CustomButton.getBtnID())) {
@@ -176,7 +176,7 @@ public class MainController {
 		}
 	}
 
-	private void xulySuKienInGameMenu() {
+	public void xulySuKienInGameMenu() {
 		JButton btReset = mainView.getExtensionPanel().getInGameMenuPanel().getBtnReset();
 		JButton btPause = mainView.getExtensionPanel().getInGameMenuPanel().getBtnPause();
 		JButton btMainMenu = mainView.getExtensionPanel().getInGameMenuPanel().getBtnMainMenu();
@@ -229,11 +229,11 @@ public class MainController {
 		});
 	}
 
-	private void xulyChienThang() {
+	public void xulyChienThang() {
 		mainModel.setGameWin(true);
 	}
 
-	private void xulyThoatGame() {
+	public void xulyThoatGame() {
 		mainView.getInGameFrame().addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
