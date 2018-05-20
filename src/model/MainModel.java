@@ -1,6 +1,8 @@
 package model;
 
-public class MainModel {
+import java.util.Observable;
+
+public class MainModel extends Observable {
 	private Bear bear;
 	private GameMap gameMap;
 	private QuestionLibrary library;
@@ -94,5 +96,7 @@ public class MainModel {
 
 	public void setGameWin(boolean gameWin) {
 		this.gameWin = gameWin;
+		setChanged();
+		notifyObservers();
 	}
 }

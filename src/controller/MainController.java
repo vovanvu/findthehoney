@@ -30,6 +30,7 @@ public class MainController {
 	public MainController(MainModel mainModel, MainView mainView) {
 		this.mainModel = mainModel;
 		this.mainView = mainView;
+		mainModel.addObserver(mainView);
 		xulyBatDauGame();
 	}
 
@@ -229,10 +230,7 @@ public class MainController {
 	}
 
 	private void xulyChienThang() {
-		mainView.removeFocus();
-		mainView.stopClock();
 		mainModel.setGameWin(true);
-		mainView.informWin();
 	}
 
 	private void xulyThoatGame() {
