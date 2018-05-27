@@ -15,6 +15,7 @@ public class MainModel extends Observable {
 	private boolean hasAnswerFalse;
 	private boolean hasReset;
 	private boolean hasPaue;
+	private boolean hasMute;
 	private boolean hasGoMainMenu;
 
 	public MainModel() {
@@ -171,8 +172,18 @@ public class MainModel extends Observable {
 		this.hasPaue = false;
 	}
 
+	public void setMute() {
+		this.hasMute = true;
+		notifyChanged();
+		this.hasMute = false;
+	}
+
 	public void setHasGoMainMenu() {
 		this.hasGoMainMenu = true;
+		// reset position before go mainMenu, because MainModel will not be destroyed.
+		gameMap.resetMap();
+		bear.resetTile();
+		// end reset
 		notifyChanged();
 		this.hasGoMainMenu = false;
 	}
@@ -193,8 +204,12 @@ public class MainModel extends Observable {
 		return hasReset;
 	}
 
-	public boolean isHasPaue() {
+	public boolean isHasPause() {
 		return hasPaue;
+	}
+
+	public boolean isHasMute() {
+		return hasMute;
 	}
 
 	public boolean isHasGoMainMenu() {

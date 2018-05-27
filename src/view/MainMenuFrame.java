@@ -34,7 +34,7 @@ public class MainMenuFrame extends JFrame {
 	JLabel Name;
 	JButton start, help, highScrore, about;
 	ImageIcon image, icon;
-	// Sound sound;
+	Sound sound;
 
 	public JButton getStart() {
 		return start;
@@ -56,10 +56,6 @@ public class MainMenuFrame extends JFrame {
 				}
 			}
 		});
-		// disable sound
-		// sound = new Sound("musicstart.wav");
-		// sound.start();
-
 		p0 = new JPanel();
 		image = new ImageIcon("resources/Nen.jpg");
 		p0 = new JPanel() {

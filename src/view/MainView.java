@@ -42,6 +42,8 @@ public class MainView implements Observer {
 	private InGameFrame inGameFrame;
 	private BoardPanel boardPanel;
 	private ExtensionPanel extensionPanel;
+	private Sound sound;
+	private SoundMain soundMain;
 
 	public MainView(MainModel mainModel) {
 		// Contructor
@@ -49,11 +51,12 @@ public class MainView implements Observer {
 		createMainMenuFrame();
 	}
 
-	public void createMainMenuFrame() {
+	private void createMainMenuFrame() {
 		mainMenuFrame = new MainMenuFrame();
+		startMainSound();
 	}
 
-	public void createInGameFrame() {
+	private void createInGameFrame() {
 		createBoardPanel();
 		createExtensionPanel();
 		inGameFrame = new InGameFrame();
@@ -77,38 +80,39 @@ public class MainView implements Observer {
 	// show hide
 	// question panel
 
-	public void hideQuestion() {
+	private void hideQuestion() {
 		extensionPanel.getQuestionPanel().setVisible(false);
 	}
 
-	public void showQuestion() {
+	private void showQuestion() {
 		extensionPanel.getQuestionPanel().setVisible(true);
 		extensionPanel.getQuestionPanel().updateQuestion();
 		inGameFrame.setFocusable(false);
 	}
 
-	public void startClock() {
+	private void startClock() {
 		extensionPanel.getGameTimerPanel().runClock();
 	}
 
-	public void stopClock() {
+	private void stopClock() {
 		extensionPanel.getGameTimerPanel().stopClock();
 	}
 
-	public void resetFocus() {
+	private void resetFocus() {
 		inGameFrame.setFocusable(true);
 		inGameFrame.requestFocus();
 	}
 
-	public void removeFocus() {
+	private void removeFocus() {
 		inGameFrame.setFocusable(false);
 	}
 
-	public void resetClock() {
+	private void resetClock() {
 		extensionPanel.getGameTimerPanel().resetClock();
 	}
 
-	public void informWin() {
+	private void informWin() {
+		extensionPanel.getInGameMenuPanel().getBtnPause().setEnabled(false);
 		removeFocus();
 		stopClock();
 		new NameFrame(extensionPanel);
@@ -135,13 +139,13 @@ public class MainView implements Observer {
 		boardPanel.updateBoard();
 	}
 
-	public void updateAfterAnswer() {
+	private void updateAfterAnswer() {
 		getExtensionPanel().getQuestionPanel().setVisible(false);
 		getInGameFrame().setFocusable(true);
 		getInGameFrame().requestFocus();
 	}
 
-	public void showExit() {
+	private void showExit() {
 		int choose = JOptionPane.showConfirmDialog(null, "Ban muon thoat game?", "Xac nhan thoat",
 				JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		if (choose == JOptionPane.YES_OPTION) {
@@ -151,13 +155,14 @@ public class MainView implements Observer {
 		}
 	}
 
-	public void resetGame() {
+	private void resetGame() {
+		extensionPanel.getInGameMenuPanel().getBtnPause().setEnabled(true);
 		hideQuestion();
 		resetClock();
 		resetFocus();
 	}
 
-	public void pauseGame() {
+	private void pauseGame() {
 		JButton btPause = getExtensionPanel().getInGameMenuPanel().getBtnPause();
 		GameMap map = mainModel.getMap();
 		int x = mainModel.getBear().getTitleX();
@@ -179,13 +184,35 @@ public class MainView implements Observer {
 
 	}
 
-	public void showMainMenu() {
+	private void showMainMenu() {
 		int choose = JOptionPane.showConfirmDialog(null, "Ban muon tro ve menu chinh?", "Xac nhan thoat",
 				JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		if (choose == JOptionPane.YES_OPTION) {
+			sound.stop();// stop InGameSound when exit to MainMenu
 			getInGameFrame().dispose();
 			createMainMenuFrame();
 		}
+	}
+
+	private void muteSound() {
+		JButton btMute = getExtensionPanel().getInGameMenuPanel().getBtnMute();
+		if (btMute.getText().equals("Mute")) {
+			sound.suspend();
+			btMute.setText(String.valueOf("Music"));
+		} else {
+			sound.resume();
+			btMute.setText("Mute");
+		}
+	}
+
+	private void startInGameSound() {
+		sound = new Sound();
+		sound.start();
+	}
+
+	private void startMainSound() {
+		soundMain = new SoundMain();
+		soundMain.start();
 	}
 
 	@Override
@@ -199,6 +226,8 @@ public class MainView implements Observer {
 		if (mainModel.isGameStarted()) {
 			createInGameFrame();
 			startClock();
+			soundMain.stop();// stop MainSound when game is started
+			startInGameSound();
 			getMainMenuFrame().dispose();
 		}
 		if (mainModel.isHasMove()) {
@@ -215,12 +244,16 @@ public class MainView implements Observer {
 		if (mainModel.isHasReset()) {
 			resetGame();
 		}
-		if (mainModel.isHasPaue()) {
+		if (mainModel.isHasPause()) {
 			pauseGame();
+		}
+		if (mainModel.isHasMute()) {
+			muteSound();
 		}
 		if (mainModel.isHasGoMainMenu()) {
 			showMainMenu();
 		}
 		updateView();
 	}
+
 }

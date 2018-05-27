@@ -161,6 +161,7 @@ public class MainController implements GameController {
 	public void xulySuKienInGameMenu() {
 		JButton btReset = mainView.getExtensionPanel().getInGameMenuPanel().getBtnReset();
 		JButton btPause = mainView.getExtensionPanel().getInGameMenuPanel().getBtnPause();
+		JButton btMute = mainView.getExtensionPanel().getInGameMenuPanel().getBtnMute();
 		JButton btMainMenu = mainView.getExtensionPanel().getInGameMenuPanel().getBtnMainMenu();
 		btReset.addActionListener(new ActionListener() {
 
@@ -174,6 +175,13 @@ public class MainController implements GameController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mainModel.setPause();
+			}
+		});
+		btMute.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				mainModel.setMute();
 			}
 		});
 		btMainMenu.addActionListener(new ActionListener() {
@@ -199,9 +207,5 @@ public class MainController implements GameController {
 		});
 	}
 
-	public static void main(String[] args) {
-		MainModel mainModel = new MainModel();
-		MainView mainView = new MainView(mainModel);
-		new MainController(mainModel, mainView);
-	}
+
 }
