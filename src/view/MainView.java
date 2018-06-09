@@ -198,7 +198,7 @@ public class MainView implements Observer {
 		JButton btMute = getExtensionPanel().getInGameMenuPanel().getBtnMute();
 		if (btMute.getText().equals("Mute")) {
 			sound.suspend();
-			btMute.setText(String.valueOf("Music"));
+			btMute.setText("Music");
 		} else {
 			sound.resume();
 			btMute.setText("Mute");

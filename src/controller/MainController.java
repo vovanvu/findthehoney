@@ -2,6 +2,7 @@ package controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
@@ -53,7 +54,7 @@ public class MainController implements GameController {
 	}
 
 	public void xulyDiChuyen() {
-		mainView.getInGameFrame().addKeyListener(new KeyListener() {
+		mainView.getInGameFrame().addKeyListener(new KeyAdapter() {
 			private void move(Direction direction, MapRange mapRange) {
 				// can move if in map range and next move postion is not rock
 				if (mainModel.isInMapRange(mapRange) && !mainModel.onTile(MapElement.ROCK, direction)) {
@@ -66,15 +67,6 @@ public class MainController implements GameController {
 					mainModel.moveBear(direction);
 					mainModel.getBear().getPosition();
 				}
-			}
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
 			}
 
 			@Override
@@ -99,9 +91,7 @@ public class MainController implements GameController {
 					mainModel.getBear().setPrevious(mainModel.getBear().getTitleX(), mainModel.getBear().getTitleY());
 					move(Direction.LEFT, MapRange.ROW);
 				}
-
 			}
-
 		});
 	}
 
@@ -206,6 +196,5 @@ public class MainController implements GameController {
 			}
 		});
 	}
-
 
 }

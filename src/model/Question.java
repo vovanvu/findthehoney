@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Map;
-
 public class Question {
 	private String content;
 	private String answerA;
@@ -47,5 +45,5 @@ public class Question {
 	public boolean isTrueAnswer(String buttonID) {
 		return buttonID.equals(getTrueAnswer());
 	}
-	
+
 }

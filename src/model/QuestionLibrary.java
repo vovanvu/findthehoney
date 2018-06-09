@@ -27,21 +27,6 @@ public class QuestionLibrary {
 		questions.add(question3);
 		questions.add(question4);
 		questions.add(question5);
-		questions.add(question1);
-		questions.add(question2);
-		questions.add(question3);
-		questions.add(question4);
-		questions.add(question5);
-		questions.add(question1);
-		questions.add(question2);
-		questions.add(question3);
-		questions.add(question4);
-		questions.add(question5);
-		questions.add(question1);
-		questions.add(question2);
-		questions.add(question3);
-		questions.add(question4);
-		questions.add(question5);
 
 	}
 
@@ -52,7 +37,7 @@ public class QuestionLibrary {
 	public int getQuestionIndex() {
 		return questionIndex;
 	}
-	
+
 	public void updateQuestionIndex() {
 		questionIndex = (questionIndex + 1) % questions.size();
 	}

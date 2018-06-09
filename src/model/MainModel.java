@@ -36,6 +36,7 @@ public class MainModel extends Observable {
 		return library;
 	}
 
+	// check if bear is in map range
 	public boolean isInMapRange(MapRange mapRange) {
 		int x = bear.getTitleX();
 		int y = bear.getTitleY();
@@ -84,6 +85,13 @@ public class MainModel extends Observable {
 		default:
 			return false;
 		}
+	}
+
+	public void moveBear(Direction direction) {
+		this.hasMove = true;
+		bear.move(direction);
+		notifyChanged();
+		this.hasMove = false;
 	}
 
 	public Question getCurrentQuestion() {
@@ -136,13 +144,6 @@ public class MainModel extends Observable {
 	private void notifyChanged() {
 		setChanged();
 		notifyObservers();
-	}
-
-	public void moveBear(Direction direction) {
-		this.hasMove = true;
-		bear.move(direction);
-		notifyChanged();
-		this.hasMove = false;
 	}
 
 	public void updateMapTrueAnswer() {

@@ -139,18 +139,15 @@ public class NameFrame extends JFrame {
 					}
 
 				});
-
-				//
-
 				back.addActionListener(new ActionListener() {
 
 					@Override
 					public void actionPerformed(ActionEvent arg0) {
 						formatTextFileWhenClose();
 						highScoreFrame.dispose();
-						name.dispose();
 					}
 				});
+				name.dispose();
 			}
 
 		});
