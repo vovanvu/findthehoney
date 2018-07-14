@@ -57,7 +57,11 @@ public class MainController implements GameController {
 		mainView.getInGameFrame().addKeyListener(new KeyAdapter() {
 			private void move(Direction direction, MapRange mapRange) {
 				// can move if in map range and next move postion is not rock
-				if (mainModel.isInMapRange(mapRange) && !mainModel.onTile(MapElement.ROCK, direction)) {
+				//no need check map range, rock is enough, because map has a wall 
+				//if (mainModel.isInMapRange(mapRange) && !mainModel.onTile(MapElement.ROCK,
+				// direction)) {
+				//check if direction is not on Rock tile
+				if (!mainModel.onTile(MapElement.ROCK, direction)) {
 					if (mainModel.onTile(MapElement.QUESTION, direction)) {
 						xulyGapCauHoi();
 					}
@@ -65,6 +69,7 @@ public class MainController implements GameController {
 						xulyChienThang();
 					}
 					mainModel.moveBear(direction);
+					// print coordinate (toa do)
 					mainModel.getBear().getPosition();
 				}
 			}

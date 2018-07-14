@@ -51,6 +51,7 @@ public class MainModel extends Observable {
 	}
 
 	// check if bear is on question tile
+	//ontile kiem tra huong do co phai la o gi do?
 	public boolean onTile(MapElement mapElement, Direction direction) {
 		int x = bear.getTitleX();
 		int y = bear.getTitleY();
