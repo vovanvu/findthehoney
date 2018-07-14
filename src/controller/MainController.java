@@ -18,7 +18,6 @@ import model.Direction;
 import model.GameMap;
 import model.MainModel;
 import model.MapElement;
-import model.MapRange;
 import model.Question;
 import view.CustomButton;
 import view.MainMenuFrame;
@@ -55,7 +54,7 @@ public class MainController implements GameController {
 
 	public void xulyDiChuyen() {
 		mainView.getInGameFrame().addKeyListener(new KeyAdapter() {
-			private void move(Direction direction, MapRange mapRange) {
+			private void move(Direction direction) {
 				// can move if in map range and next move postion is not rock
 				//no need check map range, rock is enough, because map has a wall 
 				//if (mainModel.isInMapRange(mapRange) && !mainModel.onTile(MapElement.ROCK,
@@ -79,22 +78,22 @@ public class MainController implements GameController {
 				int keycode = e.getKeyCode();
 				if (keycode == KeyEvent.VK_W) {
 					mainModel.getBear().setPrevious(mainModel.getBear().getTitleX(), mainModel.getBear().getTitleY());
-					move(Direction.UP, MapRange.COL);
+					move(Direction.UP);
 
 				}
 				if (keycode == KeyEvent.VK_S) {
 					mainModel.getBear().setPrevious(mainModel.getBear().getTitleX(), mainModel.getBear().getTitleY());
-					move(Direction.DOWN, MapRange.COL);
+					move(Direction.DOWN);
 
 				}
 				if (keycode == KeyEvent.VK_D) {
 					mainModel.getBear().setPrevious(mainModel.getBear().getTitleX(), mainModel.getBear().getTitleY());
-					move(Direction.RIGHT, MapRange.ROW);
+					move(Direction.RIGHT);
 
 				}
 				if (keycode == KeyEvent.VK_A) {
 					mainModel.getBear().setPrevious(mainModel.getBear().getTitleX(), mainModel.getBear().getTitleY());
-					move(Direction.LEFT, MapRange.ROW);
+					move(Direction.LEFT);
 				}
 			}
 		});

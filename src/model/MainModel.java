@@ -37,18 +37,18 @@ public class MainModel extends Observable {
 	}
 
 	// check if bear is in map range
-	public boolean isInMapRange(MapRange mapRange) {
-		int x = bear.getTitleX();
-		int y = bear.getTitleY();
-		switch (mapRange) {
-		case ROW:
-			return x >= 1 && x <= 6;
-		case COL:
-			return y >= 1 && y <= 6;
-		}
-		return false;
-
-	}
+	// public boolean isInMapRange(MapRange mapRange) {
+	// int x = bear.getTitleX();
+	// int y = bear.getTitleY();
+	// switch (mapRange) {
+	// case ROW:
+	// return x >= 1 && x <= 6;
+	// case COL:
+	// return y >= 1 && y <= 6;
+	// }
+	// return false;
+	//
+	// }
 
 	// check if bear is on question tile
 	//ontile kiem tra huong do co phai la o gi do?

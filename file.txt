@@ -18,6 +18,7 @@ daawqwqwqw 0:0:6
 awdaaaa 0:0:6
 dawdaw 0:0:7
 awdawdawd 0:0:7
+dawdawd 0:0:8
 daa 0:0:10
 daa 0:0:10
 awdawd 0:0:11
@@ -33,6 +34,7 @@ awdawd 0:0:11
 awdawdawd 0:0:11
 aaa 0:0:13
 aaa 0:0:14
+kkkk 0:0:14
 aaaawww 0:0:15
 vu 0:0:19
 vu 0:0:25
