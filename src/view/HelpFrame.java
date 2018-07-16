@@ -18,7 +18,7 @@ public class HelpFrame extends JFrame {
 			public void paint(Graphics g) {
 				// TODO Auto-generated method stub
 				super.paint(g);
-				ImageIcon help = new ImageIcon("resources/image.png");
+				ImageIcon help = new ImageIcon("images/image.png");
 				g.drawImage(help.getImage(), 0, 0, null);
 
 			}

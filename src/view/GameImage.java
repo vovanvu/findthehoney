@@ -8,15 +8,15 @@ public class GameImage {
 	private Image grass, rock, question, honey, bear;
 
 	public GameImage() {
-		ImageIcon img = new ImageIcon("resources/Grass.png");
+		ImageIcon img = new ImageIcon("images/Grass.png");
 		grass = img.getImage();
-		img = new ImageIcon("resources/Bear.png");
+		img = new ImageIcon("images/Bear.png");
 		bear = img.getImage();
-		img = new ImageIcon("resources/Question.png");
+		img = new ImageIcon("images/Question.png");
 		question = img.getImage();
-		img = new ImageIcon("resources/Rock.png");
+		img = new ImageIcon("images/Rock.png");
 		rock = img.getImage();
-		img = new ImageIcon("resources/Honey.png");
+		img = new ImageIcon("images/Honey.png");
 		honey = img.getImage();
 	}
 

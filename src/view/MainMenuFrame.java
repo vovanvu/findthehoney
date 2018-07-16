@@ -57,7 +57,7 @@ public class MainMenuFrame extends JFrame {
 			}
 		});
 		p0 = new JPanel();
-		image = new ImageIcon("resources/Nen.jpg");
+		image = new ImageIcon("images/Nen.jpg");
 		p0 = new JPanel() {
 			public void paintComponent(Graphics g) {
 				super.paintComponent(g);
@@ -71,7 +71,7 @@ public class MainMenuFrame extends JFrame {
 		Name.setFont(font);
 		p0.add(Name);
 
-		icon = new ImageIcon("resources/Icon.png");
+		icon = new ImageIcon("images/Icon.png");
 		start = new JButton("START", icon);
 		start.setBackground(Color.WHITE);
 		start.setFocusPainted(false);
