@@ -1,8 +1,5 @@
 package model;
 
-import java.awt.*;
-
-import javax.swing.*;
 
 public class GameMap {
 	private String[] MAP = { "rrrrrrrr", "rggqggqr", "rqrgrrgr", "rgrgrggr", "rgqgrqrr", "rgrrrggr", "rggqgqhr",

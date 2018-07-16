@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import javax.swing.JButton;
@@ -121,9 +122,17 @@ public class NameFrame extends JFrame {
 
 				sort();
 				String record = "";
-				for (Player p : players) {
+				
+				//iterator
+				Iterator iterator = players.iterator();
+				while(iterator.hasNext()) {
+					Player p = 	(Player) iterator.next();
 					record += p.getName() + " " + p.getHour() + ":" + p.getMinute() + ":" + p.getSecond() + "\n";
 				}
+				// for (Player p : players) {
+				// record += p.getName() + " " + p.getHour() + ":" + p.getMinute() + ":" +
+				// p.getSecond() + "\n";
+				// }
 
 				writeToFile(record);
 
