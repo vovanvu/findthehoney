@@ -123,7 +123,7 @@ public class NameFrame extends JFrame {
 				sort();
 				String record = "";
 				
-				//iterator
+				//iterator ( make more pattern)
 				Iterator iterator = players.iterator();
 				while(iterator.hasNext()) {
 					Player p = 	(Player) iterator.next();

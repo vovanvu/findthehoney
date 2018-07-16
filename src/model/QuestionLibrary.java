@@ -5,16 +5,15 @@ import java.util.ArrayList;
 public class QuestionLibrary {
 	private int questionIndex;
 	private ArrayList<Question> questions;
-	private QuestionList questionList;
 
 	public QuestionLibrary() {
-		questionList = new SocialQuestionList();
-		initListQuestion();
+		questionIndex = 0;
+		createLibrary();
 	}
 
-	private void initListQuestion() {
-		questionIndex = 0;
-		questions = questionList.createQuestionList();
+	private void createLibrary() {
+		Library library = LibraryFactory.createLibrary();
+		questions = library.getLibrary();
 	}
 
 	public ArrayList<Question> getQuestions() {
