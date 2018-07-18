@@ -1,4 +1,4 @@
-package view;
+package ingame.view;
 
 import javax.swing.JButton;
 

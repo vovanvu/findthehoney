@@ -1,4 +1,4 @@
-package view;
+package ingame.view;
 
 import java.util.ArrayList;
 

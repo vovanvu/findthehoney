@@ -1,4 +1,4 @@
-package view;
+package ingame.view;
 import java.util.Comparator;
 
 public class ScoreComparator implements Comparator<Player> {

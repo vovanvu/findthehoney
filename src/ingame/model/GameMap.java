@@ -1,4 +1,4 @@
-package model;
+package ingame.model;
 
 
 public class GameMap {

@@ -1,4 +1,4 @@
-package view;
+package ingame.view;
 import java.io.Serializable;
 
 public class Player implements Serializable{

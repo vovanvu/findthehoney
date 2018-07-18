@@ -1,4 +1,4 @@
-package view;
+package ingame.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -33,27 +33,22 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import model.GameMap;
-import model.MainModel;
+import ingame.model.GameMap;
+import ingame.model.MainModel;
+import mainmenu.controller.MainMenuController;
+import mainmenu.model.MainMenuModel;
+import mainmenu.view.MainMenuView;
 
 public class MainView implements Observer {
 	private MainModel mainModel;
-	private MainMenuFrame mainMenuFrame;
 	private InGameFrame inGameFrame;
 	private BoardPanel boardPanel;
 	private ExtensionPanel extensionPanel;
 	private Sound sound;
-	private SoundMain soundMain;
 
 	public MainView(MainModel mainModel) {
-		// Contructor
+		mainModel.addObserver(this);
 		this.mainModel = mainModel;
-		createMainMenuFrame();
-	}
-
-	private void createMainMenuFrame() {
-		mainMenuFrame = new MainMenuFrame();
-		startMainSound();
 	}
 
 	private void createInGameFrame() {
@@ -131,10 +126,6 @@ public class MainView implements Observer {
 		return extensionPanel;
 	}
 
-	public MainMenuFrame getMainMenuFrame() {
-		return mainMenuFrame;
-	}
-
 	private void updateView() {
 		boardPanel.updateBoard();
 	}
@@ -190,7 +181,10 @@ public class MainView implements Observer {
 		if (choose == JOptionPane.YES_OPTION) {
 			sound.stop();// stop InGameSound when exit to MainMenu
 			getInGameFrame().dispose();
-			createMainMenuFrame();
+			// create MainMenu Frame
+			MainMenuModel model = new MainMenuModel();
+			MainMenuView view = new MainMenuView(model);
+			MainMenuController controller = new MainMenuController(model, view);
 		}
 	}
 
@@ -210,11 +204,6 @@ public class MainView implements Observer {
 		sound.start();
 	}
 
-	private void startMainSound() {
-		soundMain = new SoundMain();
-		soundMain.start();
-	}
-
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (mainModel.isGameWin()) {
@@ -226,11 +215,10 @@ public class MainView implements Observer {
 		if (mainModel.isGameStarted()) {
 			createInGameFrame();
 			startClock();
-			soundMain.stop();// stop MainSound when game is started
 			startInGameSound();
-			getMainMenuFrame().dispose();
 		}
 		if (mainModel.isHasMove()) {
+
 		}
 		if (mainModel.isHasAnswerTrue()) {
 			updateAfterAnswer();

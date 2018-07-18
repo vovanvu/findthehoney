@@ -1,4 +1,4 @@
-package view;
+package ingame.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -131,12 +131,10 @@ public class MainMenuFrame extends JFrame {
 
 	}
 
+	
 	JTextArea scoreTableTextArea;
-
 	private void createHighScoreJframe() {
 		JFrame highScoreFrame = new JFrame();
-		JPanel panel;
-
 		highScoreFrame.setTitle("HighScores");
 		highScoreFrame.setSize(300, 300);
 		highScoreFrame.setLocationRelativeTo(null);
@@ -149,7 +147,7 @@ public class MainMenuFrame extends JFrame {
 
 		});
 		highScoreFrame.setLayout(new BorderLayout());
-		panel = new JPanel();
+		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		JButton back = new JButton("Back");
 		back.addActionListener(new ActionListener() {

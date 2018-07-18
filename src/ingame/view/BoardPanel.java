@@ -1,12 +1,12 @@
-package view;
+package ingame.view;
 
 import java.awt.*;// * is all
 import java.awt.event.*;
 
 import javax.swing.*;
 
-import model.Bear;
-import model.GameMap;
+import ingame.model.Bear;
+import ingame.model.GameMap;
 
 public class BoardPanel extends JPanel {
 	private GameImage gameImage;

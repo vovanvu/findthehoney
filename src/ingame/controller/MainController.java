@@ -1,4 +1,4 @@
-package controller;
+package ingame.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,12 +9,12 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 
-import model.Direction;
-import model.MainModel;
-import model.MapElement;
-import model.Question;
-import view.CustomButton;
-import view.MainView;
+import ingame.model.Direction;
+import ingame.model.MainModel;
+import ingame.model.MapElement;
+import ingame.model.Question;
+import ingame.view.CustomButton;
+import ingame.view.MainView;
 
 public class MainController implements GameController {
 	private MainModel mainModel;
@@ -23,19 +23,8 @@ public class MainController implements GameController {
 	public MainController(MainModel mainModel, MainView mainView) {
 		this.mainModel = mainModel;
 		this.mainView = mainView;
-		mainModel.addObserver(mainView);
-		xulyBatDauGame();
-	}
-
-	public void xulyBatDauGame() {
-		mainView.getMainMenuFrame().getStart().addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				mainModel.setGameStarted();
-				xulyInGame();
-			}
-		});
+		mainModel.setGameStarted();
+		xulyInGame();
 	}
 
 	public void xulyInGame() {
@@ -176,7 +165,6 @@ public class MainController implements GameController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				mainModel.setHasGoMainMenu();
-				xulyBatDauGame();
 			}
 		});
 	}

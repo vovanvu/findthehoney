@@ -1,33 +1,27 @@
-package view;
+package ingame.view;
 
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import mainmenu.view.HighScoreFrame;
 
 public class NameFrame extends JFrame {
 	private ExtensionPanel extensionPanel;
@@ -36,10 +30,7 @@ public class NameFrame extends JFrame {
 	private ArrayList<Player> players;
 	private ArrayList<String> readArr;
 	private ArrayList<Player> newPlayers;
-	private JTextArea scoreTableTextArea;
 	private JFrame name;
-	private JFrame highScoreFrame;
-	private JButton back;
 	private JButton btnOk;
 	private JButton btnCancel;
 	private JPanel confirmPanel;
@@ -122,40 +113,20 @@ public class NameFrame extends JFrame {
 
 				sort();
 				String record = "";
-				
-				//iterator ( make more pattern)
+
+				// iterator ( make more pattern)
 				Iterator iterator = players.iterator();
-				while(iterator.hasNext()) {
-					Player p = 	(Player) iterator.next();
+				while (iterator.hasNext()) {
+					Player p = (Player) iterator.next();
 					record += p.getName() + " " + p.getHour() + ":" + p.getMinute() + ":" + p.getSecond() + "\n";
 				}
 				// for (Player p : players) {
 				// record += p.getName() + " " + p.getHour() + ":" + p.getMinute() + ":" +
 				// p.getSecond() + "\n";
 				// }
-
 				writeToFile(record);
-
-				createHighScoreJframe();
-
-				readFromFile();
-
-				highScoreFrame.addWindowListener(new WindowAdapter() {
-					@Override
-					public void windowClosing(WindowEvent e) {
-						formatTextFileWhenClose();
-						e.getWindow().dispose();
-					}
-
-				});
-				back.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent arg0) {
-						formatTextFileWhenClose();
-						highScoreFrame.dispose();
-					}
-				});
+				// create HighScoreFrame
+				new HighScoreFrame();
 				name.dispose();
 			}
 
@@ -180,37 +151,6 @@ public class NameFrame extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	// read from score text file and append it to scoreTableTextArea for user can
-	// see it
-	private void readFromFile() {
-		// TODO Auto-generated method stub
-		FileReader fr = null;
-		try {
-			fr = new FileReader("file.txt");
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		BufferedReader br = new BufferedReader(fr);
-		int i;
-		try {
-			while ((i = br.read()) != -1) {
-				String s = Character.toString((char) i);
-				scoreTableTextArea.append(s);
-				;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			br.close();
-			fr.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	// get a ArrayList of Player from string array (readArr), use substring to get
@@ -260,62 +200,4 @@ public class NameFrame extends JFrame {
 		Collections.sort(players, comparator);
 	}
 
-	// remove all non-content line, if not it will be error in the next time read
-	// file
-	private void formatTextFileWhenClose() {
-		File file1 = new File("file.txt");
-		File file2 = new File("file2.txt");
-		Scanner sFile;
-		PrintWriter writer;
-
-		try {
-
-			sFile = new Scanner(new File("file.txt"));
-			writer = new PrintWriter("file2.txt");
-
-			while (sFile.hasNext()) {
-				String line = sFile.nextLine();
-				if (!line.isEmpty()) {
-					writer.write(line);
-					writer.write("\n");
-				}
-			}
-
-			sFile.close();
-			writer.close();
-
-		} catch (FileNotFoundException ex) {
-			// do nothing
-		}
-		file1.delete();
-		file2.renameTo(file1);
-	}
-
-	private void createHighScoreJframe() {
-		highScoreFrame = new JFrame();
-		JPanel panel;
-		highScoreFrame.setTitle("HighScores");
-		highScoreFrame.setSize(300, 300);
-		highScoreFrame.setLocationRelativeTo(null);
-		highScoreFrame.setVisible(true);
-		highScoreFrame.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent e) {
-				formatTextFileWhenClose();
-				highScoreFrame.dispose();
-				name.dispose();
-			}
-
-		});
-		highScoreFrame.setLayout(new BorderLayout());
-		panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-		back = new JButton("Back");
-		scoreTableTextArea = new JTextArea(400, 300);
-		scoreTableTextArea.setEditable(false);
-		JScrollPane jScrollPane = new JScrollPane(scoreTableTextArea);
-		panel.add(back, BorderLayout.SOUTH);
-		panel.add(jScrollPane, BorderLayout.CENTER);
-		highScoreFrame.add(panel);
-	}
 }

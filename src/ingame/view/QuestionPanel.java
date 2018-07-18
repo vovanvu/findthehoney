@@ -1,4 +1,4 @@
-package view;
+package ingame.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import model.QuestionLibrary;
+import ingame.model.QuestionLibrary;
 
 public class QuestionPanel extends JPanel {
 	private JTextArea taQuestion;

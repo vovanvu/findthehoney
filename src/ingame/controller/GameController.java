@@ -1,7 +1,6 @@
-package controller;
+package ingame.controller;
 
 public interface GameController {
-	void xulyBatDauGame();
 
 	void xulyInGame();
 
