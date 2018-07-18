@@ -1,4 +1,4 @@
-package ingame.view;
+package mainmenu.view;
 
 import java.io.File;
 import java.io.IOException;

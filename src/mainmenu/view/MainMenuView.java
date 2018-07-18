@@ -29,7 +29,6 @@ import ingame.controller.MainController;
 import ingame.model.MainModel;
 import ingame.view.MainView;
 import ingame.view.Sound;
-import ingame.view.SoundMain;
 import mainmenu.controller.MainMenuController;
 import mainmenu.model.MainMenuModel;
 
