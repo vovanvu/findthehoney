@@ -1,4 +1,4 @@
-package ingame.view;
+package mainmenu.view;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
