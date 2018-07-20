@@ -28,7 +28,6 @@ import javax.swing.JTextArea;
 import ingame.controller.MainController;
 import ingame.model.MainModel;
 import ingame.view.MainView;
-import ingame.view.Sound;
 import mainmenu.controller.MainMenuController;
 import mainmenu.model.MainMenuModel;
 
@@ -37,7 +36,8 @@ public class MainMenuView extends JFrame implements Observer {
 	JLabel Name;
 	public JButton start, help, highScrore, about;
 	ImageIcon image, icon;
-	private SoundMain soundMain;
+	private Sound main;
+
 	public MainMenuView(MainMenuModel mainMenuModel) {
 		mainMenuModel.addObserver(this);
 		//
@@ -58,7 +58,6 @@ public class MainMenuView extends JFrame implements Observer {
 				}
 			}
 		});
-		p0 = new JPanel();
 		image = new ImageIcon("images/Nen.jpg");
 		p0 = new JPanel() {
 			public void paintComponent(Graphics g) {
@@ -111,16 +110,19 @@ public class MainMenuView extends JFrame implements Observer {
 		}
 		if (model.isStart()) {
 			dispose();
-			soundMain.stop();
-			//create ingame frame
+			main.stop();
+			// create ingame frame
 			MainModel mainModel = new MainModel();
 			MainView mainView = new MainView(mainModel);
 			new MainController(mainModel, mainView);
 		}
 	}
+
 	private void startMainSound() {
-		soundMain = new SoundMain();
-		soundMain.start();
+		SoundFactory soundFactory = new SoundFactory();
+		SoundStore ss = new SoundStore(soundFactory);
+		main = ss.makeSound("main");
+		main.start();
 	}
-	
+
 }

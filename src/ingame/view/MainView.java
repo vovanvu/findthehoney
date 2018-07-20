@@ -38,13 +38,16 @@ import ingame.model.MainModel;
 import mainmenu.controller.MainMenuController;
 import mainmenu.model.MainMenuModel;
 import mainmenu.view.MainMenuView;
+import mainmenu.view.Sound;
+import mainmenu.view.SoundFactory;
+import mainmenu.view.SoundStore;
 
 public class MainView implements Observer {
 	private MainModel mainModel;
 	private InGameFrame inGameFrame;
 	private BoardPanel boardPanel;
 	private ExtensionPanel extensionPanel;
-	private Sound sound;
+	private Sound ingame;
 
 	public MainView(MainModel mainModel) {
 		mainModel.addObserver(this);
@@ -179,7 +182,7 @@ public class MainView implements Observer {
 		int choose = JOptionPane.showConfirmDialog(null, "Ban muon tro ve menu chinh?", "Xac nhan thoat",
 				JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		if (choose == JOptionPane.YES_OPTION) {
-			sound.stop();// stop InGameSound when exit to MainMenu
+			ingame.stop();// stop InGameSound when exit to MainMenu
 			getInGameFrame().dispose();
 			// create MainMenu Frame
 			MainMenuModel model = new MainMenuModel();
@@ -191,17 +194,19 @@ public class MainView implements Observer {
 	private void muteSound() {
 		JButton btMute = getExtensionPanel().getInGameMenuPanel().getBtnMute();
 		if (btMute.getText().equals("Mute")) {
-			sound.suspend();
+			ingame.suspend();
 			btMute.setText("Music");
 		} else {
-			sound.resume();
+			ingame.resume();
 			btMute.setText("Mute");
 		}
 	}
 
 	private void startInGameSound() {
-		sound = new Sound();
-		sound.start();
+		SoundFactory soundFactory = new SoundFactory();
+		SoundStore ss = new SoundStore(soundFactory);
+		ingame = ss.makeSound("ingame");
+		ingame.start();
 	}
 
 	@Override
